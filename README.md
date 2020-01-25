@@ -1,10 +1,11 @@
 # Web-Project-2016 Year 2 Semester 1
-The GPU Store will essentially store all information about Graphics Cards which are in Stock in a Database. 
+Graphics Card web store created using a Bootstrap Template, PHP & MySQLi.
 
 # Website Functions
 * Save Customer Details to DB.
 * Update of Customer Details already stored in DB. 
-* Delete a Customer from the DB. 
+* Delete a Customer from the DB.
+* Add new Graphic Cards to stock.
 * Graphics Card information to be retrieved from DB.
 * Purchasing of Graphics Cards
 * Graphics Card stock quantity automatically updated after a sale is made.
