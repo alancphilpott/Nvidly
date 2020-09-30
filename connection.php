@@ -1,6 +1,6 @@
 <?php
 
-$connection = mysqli_connect("localhost","root","","store");
+$connection = mysqli_connect("localhost:6001","root","","nvidly");
 
 if(mysqli_connect_errno())
 {
