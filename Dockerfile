@@ -1,9 +1,7 @@
-FROM phpmyadmin:phpmyadmin
+FROM php:7.3.3-apache
 
-RUN apt-get update && apt-get install -y
+RUN apt-get update && apt-get upgrade -y
 
-RUN mkdir /nvidly && && mkdir /app/nvidly/www
+RUN docker-php-ext-install mysqli
 
-COPY ./index.php /app/nvidly/www
-
-RUN cp -r /app/nvidly/www/* /var/www/html/.
+EXPOSE 80

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Agency - Start Bootstrap Theme</title>
+    <title>Nvidly - Graphics Card Store</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -112,7 +112,7 @@
 
                 if(!$result)
                 {
-                    echo "Query Failed";
+                    echo "\nQuery Failed";
                     exit();
                 }
 

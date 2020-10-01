@@ -1,9 +1,16 @@
 <?php
 
-$connection = mysqli_connect("localhost:6001","root","","nvidly");
+$host = "db";
+$user = "root";
+$password = "root";
+$db = "nvidly";
 
-if(mysqli_connect_errno())
-{
-    echo "Failed To Connect To MySQL";
-    exit();
+$connection = mysqli_connect($host,$user,$password,$db);
+
+if ($connection->connect_error) {
+    echo "OOOOOF - Connection Failed" . $connection->connect_error;
+} else {
+    echo "She's a Beaut M8 - Successfully Connected to MySQL";
 }
+
+?>
