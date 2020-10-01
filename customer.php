@@ -118,19 +118,19 @@
                     echo("You Did Not Enter All Details<br><br>");
                 }
                 else {
-                    include 'connection.php';
+                    include 'db.php';
 
-                    $forenameEsc = mysqli_real_escape_string($connection,$forename);
-                    $surnameEsc = mysqli_real_escape_string($connection,$surname);
-                    $addressEsc = mysqli_real_escape_string($connection,$address);
-                    $emailEsc = mysqli_real_escape_string($connection,$email);
+                    $forenameEsc = mysqli_real_escape_string($db,$forename);
+                    $surnameEsc = mysqli_real_escape_string($db,$surname);
+                    $addressEsc = mysqli_real_escape_string($db,$address);
+                    $emailEsc = mysqli_real_escape_string($db,$email);
 
                     $sql = "INSERT INTO customer(email,forename,surname,address) VALUES('$emailEsc','$forenameEsc','$surnameEsc','$addressEsc')";
 
-                    $result = mysqli_query($connection,$sql);
+                    $result = mysqli_query($db,$sql);
 
                     if($result == 0) {
-                        echo("<p>Error Registering: ". mysqli_error($connection) . "</p>");
+                        echo("<p>Error Registering: ". mysqli_error($db) . "</p>");
                     }
                     else {
                         echo("<br><strong>Success</strong>. User: " . $forename . " " . $surname . " Has Been Registered");
@@ -148,11 +148,11 @@
 
             if(!isset($_POST['update']) AND !isset($_POST['delete'])) {
 
-                include 'connection.php';
+                include 'db.php';
 
                 $statement = "SELECT * FROM customer";
 
-                $result = mysqli_query($connection, $statement);
+                $result = mysqli_query($db, $statement);
 
                 if(!$result) {
                     echo "Query One Failed";
@@ -187,7 +187,7 @@
                     }
                 }
                 mysqli_free_result($result);
-                mysqli_close($connection);
+                mysqli_close($db);
 
             }
 
@@ -196,11 +196,11 @@
             if(isset($_POST['update'])) {
                 $custID = (int) $_POST['custID'];
 
-                include 'connection.php';
+                include 'db.php';
 
                 $statement = "SELECT * FROM customer WHERE custID = $custID";
 
-                $result = mysqli_query($connection,$statement);
+                $result = mysqli_query($db,$statement);
 
                 if(!$result) {
                     echo "Query Failed";
@@ -238,13 +238,13 @@
 
                 }
                 mysqli_free_result($result);
-                mysqli_close($connection);
+                mysqli_close($db);
             }
 
             // -- When new customer values have been entered, do this --
 
             if(isset($_POST['user_update'])) {
-                include 'connection.php';
+                include 'db.php';
 
                 $updatedForename = $_POST['ud_forename'];
                 $updatedSurname = $_POST['ud_surname'];
@@ -256,13 +256,13 @@
                     exit();
                 }
 
-                $updatedForenameEsc = mysqli_real_escape_string($connection,$updatedForename);
-                $updatedSurnameEsc = mysqli_real_escape_string($connection,$updatedSurname);
-                $updatedAddressEsc = mysqli_real_escape_string($connection,$updatedAddress);
+                $updatedForenameEsc = mysqli_real_escape_string($db,$updatedForename);
+                $updatedSurnameEsc = mysqli_real_escape_string($db,$updatedSurname);
+                $updatedAddressEsc = mysqli_real_escape_string($db,$updatedAddress);
 
                 $statement = "UPDATE customer SET forename = '$updatedForenameEsc', surname = '$updatedSurnameEsc', address = '$updatedAddressEsc' WHERE custID = $userToUpdate";
 
-                $result = mysqli_query($connection,$statement);
+                $result = mysqli_query($db,$statement);
 
                 if(!$result) {
                     echo "Query Failed";
@@ -270,12 +270,12 @@
                 }
 
                 else {
-                    if(mysqli_affected_rows($connection) < 1) {
+                    if(mysqli_affected_rows($db) < 1) {
                         echo "No Updates Made";
                     }
                     else {
                         echo ("<br>Customer ID Number: " . $userToUpdate . " Updated");
-                        mysqli_close($connection);
+                        mysqli_close($db);
                     }
                 }
             }
@@ -283,27 +283,27 @@
             // -- When a user is chosen to delete, do this --
 
             if(isset($_POST['delete'])) {
-                include 'connection.php';
+                include 'db.php';
 
                 $userToDelete = (int) $_POST['custID'];
 
                 $statement = "DELETE FROM customer WHERE custID = $userToDelete";
 
-                $result = mysqli_query($connection,$statement);
+                $result = mysqli_query($db,$statement);
 
                 if(!$result) {
-                    echo "Query Failed - " . mysqli_error($connection);
+                    echo "Query Failed - " . mysqli_error($db);
                     echo "<br><br><strong>Error: </strong>Customer Exists In A Sale";
                     exit();
                 }
 
                 else {
-                    if(mysqli_affected_rows($connection) < 1) {
+                    if(mysqli_affected_rows($db) < 1) {
                         echo "No Deletion Made";
                     }
                     else {
                         echo ("<br>Customer ID Number: " . $userToDelete . " Deleted");
-                        mysqli_close($connection);
+                        mysqli_close($db);
                     }
                 }
             }

@@ -93,7 +93,7 @@
 
             if(isset($_POST['confirmButton']))
             {
-                include 'connection.php';
+                include 'db.php';
 
                 $totalCost = (double) $_POST['totalCost'];
                 $date = date("Y-m-d");
@@ -102,15 +102,15 @@
                 $saleQuantity = (int) $_POST['saleQuantity'];
 
                 $statementOne = "INSERT INTO sale(stockID,custID,quantity,totalPrice,saleDate) VALUES($stockID,$custID,$saleQuantity,$totalCost,'$date')";
-                $resultOne = mysqli_query($connection,$statementOne);
+                $resultOne = mysqli_query($db,$statementOne);
                 if(!$resultOne){
-                    echo "Query One Failed " . mysqli_error($connection);
+                    echo "Query One Failed " . mysqli_error($db);
                 }
                 else {
                     $statementTwo = "SELECT * FROM stock WHERE stockID = $stockID";
-                    $resultTwo = mysqli_query($connection,$statementTwo);
+                    $resultTwo = mysqli_query($db,$statementTwo);
                     if(!$resultTwo){
-                        echo "Query Two Failed " . mysqli_error($connection);
+                        echo "Query Two Failed " . mysqli_error($db);
                     }
                     else{
                         if(mysqli_num_rows($resultTwo) < 1) {
@@ -124,10 +124,10 @@
                             $newStockQuantity = ($stockQuantityToUpdate - $saleQuantity);
 
                             $statementThree = "UPDATE stock SET stockCount = $newStockQuantity WHERE stockID = $stockID";
-                            $resultThree = mysqli_query($connection,$statementThree);
+                            $resultThree = mysqli_query($db,$statementThree);
 
                             if(!$resultThree){
-                                echo "Query Failed " . mysqli_error($connection);
+                                echo "Query Failed " . mysqli_error($db);
                             }
                             else {
                                 echo "Order Has Been Placed and Stock Successfully Updated";

@@ -104,15 +104,15 @@
             // -- Default viewing with all available products listed --
             if(!isset($_POST['searchButton']) AND !isset($_POST['orderByPrice'])) {
 
-                include 'connection.php';
+                include 'db.php';
 
                 $statement = "SELECT * FROM stock WHERE stockCount > 0";
 
-                $result = mysqli_query($connection, $statement);
+                $result = mysqli_query($db, $statement);
 
                 if(!$result)
                 {
-                    echo "\nQuery Failed";
+                    printf("error: %s\n", mysqli_error($db));
                     exit();
                 }
 
@@ -147,7 +147,7 @@
                     }
                 }
                 mysqli_free_result($result);
-                mysqli_close($connection);
+                mysqli_close($db);
             }
 
             // -- When a product is searched for, this will be done --
@@ -161,12 +161,12 @@
                     exit();
                 }
 
-                include 'connection.php';
+                include 'db.php';
 
-                $productSearch = mysqli_real_escape_string($connection,$productSearch);
+                $productSearch = mysqli_real_escape_string($db,$productSearch);
                 $statement = "SELECT * FROM stock WHERE name LIKE '%$productSearch%' OR specification LIKE '%$productSearch%' OR manufacturer LIKE '%$productSearch%'";
 
-                $result = mysqli_query($connection, $statement);
+                $result = mysqli_query($db, $statement);
 
                 if(!$result)
                 {
@@ -206,17 +206,17 @@
                     }
                 }
                 mysqli_free_result($result);
-                mysqli_close($connection);
+                mysqli_close($db);
             }
 
             // -- This orders all products by price when requested --
             if(isset($_POST['orderByPrice'])) {
 
-                include 'connection.php';
+                include 'db.php';
 
                 $statement = "SELECT * FROM stock ORDER BY salePrice ASC";
 
-                $result = mysqli_query($connection, $statement);
+                $result = mysqli_query($db, $statement);
 
                 if(!$result)
                 {
@@ -255,7 +255,7 @@
                     }
                 }
                 mysqli_free_result($result);
-                mysqli_close($connection);
+                mysqli_close($db);
             }
 
             ?>

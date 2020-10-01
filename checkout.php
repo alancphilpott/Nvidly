@@ -100,11 +100,11 @@
                     echo "<u>No quantity chosen</u>, please go <a href='index.php'>BACK</a> and enter a quantity to buy.";
                 } else {
 
-                    include 'connection.php';
+                    include 'db.php';
 
                     $statement = "SELECT * FROM stock WHERE stockID = $stockID";
 
-                    $result = mysqli_query($connection, $statement);
+                    $result = mysqli_query($db, $statement);
 
                     if (!$result) {
                         echo "Query Failed";
@@ -145,7 +145,7 @@
                         }
                     }
                     mysqli_free_result($result);
-                    mysqli_close($connection);
+                    mysqli_close($db);
                 }
             }
 

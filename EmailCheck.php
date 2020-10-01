@@ -103,15 +103,15 @@
                 }
 
                 else {
-                    include 'connection.php';
+                    include 'db.php';
 
-                    $email = mysqli_real_escape_string($connection,$email);
+                    $email = mysqli_real_escape_string($db,$email);
                     $statement = "SELECT * FROM customer WHERE email = '$email'";
 
-                    $result = mysqli_query($connection,$statement);
+                    $result = mysqli_query($db,$statement);
 
                     if(!$result){
-                        echo "Query Failed -" . mysqli_error($connection);
+                        echo "Query Failed -" . mysqli_error($db);
                         exit();
                     }
                     else {

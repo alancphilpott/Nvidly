@@ -94,11 +94,11 @@
 
             <?php
 
-            include 'connection.php';
+            include 'db.php';
 
             $statement = "SELECT * FROM sale";
 
-            $result = mysqli_query($connection, $statement);
+            $result = mysqli_query($db, $statement);
 
             if(!$result)
             {
@@ -123,7 +123,7 @@
                 }
             }
             mysqli_free_result($result);
-            mysqli_close($connection);
+            mysqli_close($db);
 
             ?>
         </div>
