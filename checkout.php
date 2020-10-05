@@ -133,7 +133,7 @@
                         <p>Quantity Chosen: " . $saleQuantity . "<br>
                         Total Cost: €" . $totalCost . "<br>
 
-                            <form method = 'post' action = 'EmailCheck.php'>
+                            <form method = 'post' action = 'emailCheck.php'>
                                 <input type = 'text' name = 'emailCheck' placeholder = 'Customer Email Here' />
                                 <input type = 'submit' name = 'checkEmail' value = 'Check Email' />
                                 
